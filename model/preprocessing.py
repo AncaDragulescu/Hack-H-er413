@@ -77,10 +77,10 @@ for header in cont_cols:
         # df = df[df[header].notna()]
 
         # impute with -1 constant
-        impute = SimpleImputer(strategy='median')
+        impute = SimpleImputer(strategy='constant', fill_value=0)
         arr = np.array(df[header]).reshape(-1, 1)
         df[header] = impute.fit_transform(arr)
 
 print("shape: ", df.shape)
 
-df.to_csv("exploratory_median.csv", index=False)
+df.to_csv("exploratory_constant_0.csv", index=False)

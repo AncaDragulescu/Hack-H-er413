@@ -78,8 +78,13 @@ for header in cont_cols:
 
         # replace NA w random sample from column
         # https://stackoverflow.com/questions/46384934/pandas-replace-nan-using-random-sampling-of-column-values
-        df.apply(lambda x: np.where(x.isnull(), x.dropna().sample(len(x), replace=True), x))
+        # df = df.apply(lambda x: np.where(x.isnull(), x.dropna().sample(len(x), replace=True), x))
+
+        # # impute with -1 constant
+        impute = SimpleImputer(strategy='constant', fill_value=-1)
+        arr = np.array(df[header]).reshape(-1, 1)
+        df[header] = impute.fit_transform(arr)
 
 print("shape: ", df.shape)
 
-df.to_csv("exploratory_random_sample.csv", index=False)
+df.to_csv("exploratory_fill_neg_1.csv", index=False)

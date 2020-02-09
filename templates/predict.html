@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-
     <div class="col-md-12 order-md-1">
         <h1 class="md3"> Probability of Survival for Patient = {{ prediction }} </h1>
         <hr class="mb-6">
@@ -8,24 +7,21 @@
         <p class="mb=6"> </p>
 
         <h2 class="mb-3">Patient Information</h2>
-
         <h4 class="mb-3">Inputted Information</h4>
-
-            {% for key in output %}
+        {% for key in output %}
             <hr class="mb-4">
             <div class="form-group row">
-
                 <h5 class="mb-3 col-sm-6 col-form-label">{{key}}</h5>
                 <div class="custom-control custom-checkbox">
-                        <label for="same-address" class="col-sm-6 col-form-label">{{ output[key] }}</label>
-                        <p class="mb-6"></p>
-                    </div>
+                    <label for="same-address" class="col-sm-6 col-form-label">{{ output[key] }}</label>
+                    <p class="mb-6"></p>
                 </div>
-            {% endfor %}
-            <hr class="mb-6">
-            <form action ="/home">
+            </div>
+        {% endfor %}
+        <hr class="mb-6">
+        <form action ="/home">
             <button class="btn btn-primary btn-lg btn-block" type="submit">Predict New</button>
-            </form>
+        </form>
     </div>
 
 {% endblock content %}

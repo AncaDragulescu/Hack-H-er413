@@ -76,11 +76,10 @@ for header in cont_cols:
         # drop rows w NAs
         # df = df[df[header].notna()]
 
-        # impute with -1 constant
-        impute = SimpleImputer(strategy='constant', fill_value=0)
-        arr = np.array(df[header]).reshape(-1, 1)
-        df[header] = impute.fit_transform(arr)
+        # replace NA w random sample from column
+        # https://stackoverflow.com/questions/46384934/pandas-replace-nan-using-random-sampling-of-column-values
+        df.apply(lambda x: np.where(x.isnull(), x.dropna().sample(len(x), replace=True), x))
 
 print("shape: ", df.shape)
 
-df.to_csv("exploratory_constant_0.csv", index=False)
+df.to_csv("exploratory_random_sample.csv", index=False)

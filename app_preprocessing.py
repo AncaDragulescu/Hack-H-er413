@@ -35,17 +35,17 @@ def json_to_df(data):
     Returns:
      - a pandas DataFrame with missing values filled in
     """
-    lst = json.loads(data)
-    dict = lst[0]
+    # lst = json.loads(data)
+    # dict = lst[0]
 
     # categorical variables get replaced with -1
     for cat in cat_cols:
-        if not dict[cat]:
-            dict[cat] = -1
+        if not data[cat]:
+            data[cat] = -1
 
     # continuous variables get replaced with mean
     for cont in cont_cols:
-        if not dict[cont]:
-            dict[cont] = cont_means[cont]
-
-    return pd.DataFrame.from_dict(dict)
+        if not data[cont]:
+            data[cont] = cont_means[cont]
+    x = pd.DataFrame(data, index=[0])
+    return x
